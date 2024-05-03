@@ -2,7 +2,7 @@ import 'package:banking_app/data_json/card_json.dart';
 import 'package:banking_app/data_json/card_operations_json.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _CardPageState extends State<CardPage> {
             size: 22,
           )),
       title: Text(
-        "Card",
+        "Transferencia",
         style: TextStyle(fontSize: 18, color: black),
       ),
       actions: [
@@ -63,8 +63,8 @@ class _CardPageState extends State<CardPage> {
               controller: controller,
               children: List.generate(cardLists.length, (index) {
                 return getCards(
-                   cardLists[index]['amount'],
-                    cardLists[index]['currency'],
+                  cardLists[index]['amount'],
+                  cardLists[index]['currency'],
                   cardLists[index]['card_number'],
                   cardLists[index]['valid_date'],
                   cardLists[index]['bg_color'],
@@ -144,53 +144,58 @@ class _CardPageState extends State<CardPage> {
                 Column(
                   children: List.generate(cardOperations.length, (index) {
                     return Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20,bottom: 20),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: grey.withOpacity(0.1),
-                          spreadRadius: 10,
-                          blurRadius: 10,
-                          // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Row(
-                        children: [
-                          Container(
-                        width: 40,
-                        height: 40,
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 20),
+                      child: Container(
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                            color: secondary.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Center(
-                          child: Icon(
-                           cardOperations[index]['icon'],
-                            color: primary,
-                            size: 20,
+                          color: white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: grey.withOpacity(0.1),
+                              spreadRadius: 10,
+                              blurRadius: 10,
+                              // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: secondary.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Center(
+                                  child: Icon(
+                                    cardOperations[index]['icon'],
+                                    color: primary,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                cardOperations[index]['title'],
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              )
+                            ],
                           ),
                         ),
                       ),
-                      SizedBox(width: 15,),
-                      Text(
-                        cardOperations[index]['title'],
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
-                      )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                    );
                   }),
                 ),
-                SizedBox(height: 30,)
+                SizedBox(
+                  height: 30,
+                )
               ],
             ),
           )
@@ -199,7 +204,7 @@ class _CardPageState extends State<CardPage> {
     );
   }
 
-  Widget getCards(amount,currency,cardNumber, validDate, bgColor) {
+  Widget getCards(amount, currency, cardNumber, validDate, bgColor) {
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -219,7 +224,7 @@ class _CardPageState extends State<CardPage> {
               width: 5,
             ),
             Text(
-             amount,
+              amount,
               style: TextStyle(
                   fontSize: 35, color: black, fontWeight: FontWeight.bold),
             ),

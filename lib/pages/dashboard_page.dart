@@ -1,8 +1,10 @@
 import 'package:banking_app/data_json/balance_json.dart';
 import 'package:banking_app/pages/card_page.dart';
 import 'package:banking_app/theme/color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
 class DashbaordPage extends StatefulWidget {
   const DashbaordPage({Key? key}) : super(key: key);
@@ -40,7 +42,6 @@ class _DashbaordPageState extends State<DashbaordPage> {
   }
 
   Widget getBody() {
-   
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -122,16 +123,21 @@ class _DashbaordPageState extends State<DashbaordPage> {
                         width: 15,
                       ),
                       Flexible(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: secondary.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: Text(
-                              "Add money",
-                              style: TextStyle(
-                                  color: white, fontWeight: FontWeight.w500),
+                        child: GestureDetector(
+                          onTap: () {
+                            showBottomModalView();
+                          },
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: secondary.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Center(
+                              child: Text(
+                                "Transferir",
+                                style: TextStyle(
+                                    color: white, fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
                         ),
@@ -147,7 +153,7 @@ class _DashbaordPageState extends State<DashbaordPage> {
                               borderRadius: BorderRadius.circular(12)),
                           child: Center(
                             child: Text(
-                              "Exchange",
+                              "Ahorros",
                               style: TextStyle(
                                   color: white, fontWeight: FontWeight.w500),
                             ),
@@ -178,6 +184,96 @@ class _DashbaordPageState extends State<DashbaordPage> {
           ),
         ),
       ],
+    );
+  }
+
+  void showBottomModalView() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 400,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('Transferencia 200 USD',
+                    style: const TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: const Text('     De:',
+                      style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold)),
+                ),
+                userCard(),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: const Text('     Para:',
+                      style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold)),
+                ),
+                userCard(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        child: const Text('Cerrar',
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        onPressed: () => Navigator.pop(context),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                        )),
+                    ElevatedButton(
+                        child: const Text('Finalizar',
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        onPressed: () => Navigator.pop(context),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.lightGreen),
+                        ))
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget userCard() {
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
+              ),
+              title: Text('Emmanuel Cruz Reyes'),
+              subtitle: Text('Cuenta cheques'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -227,7 +323,7 @@ class _DashbaordPageState extends State<DashbaordPage> {
                               child: Icon(
                                 AntDesign.wallet,
                                 color: primary,
-                                 size: 20,
+                                size: 20,
                               ),
                             ),
                           ),
@@ -333,7 +429,7 @@ class _DashbaordPageState extends State<DashbaordPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Cards",
+                "Tarjetas",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
               Container(
@@ -351,7 +447,7 @@ class _DashbaordPageState extends State<DashbaordPage> {
                       color: primary,
                     ),
                     Text(
-                      "ADD CARD",
+                      "Agregar",
                       style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
@@ -366,8 +462,9 @@ class _DashbaordPageState extends State<DashbaordPage> {
             height: 15,
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => CardPage()));
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => CardPage()));
             },
             child: Container(
               width: double.infinity,
@@ -390,40 +487,38 @@ class _DashbaordPageState extends State<DashbaordPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Row(
-                      children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: secondary.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: Icon(
-                              AntDesign.creditcard,
-                              color: primary,
-                              size: 20,
+                        Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: secondary.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Center(
+                                child: Icon(
+                                  AntDesign.creditcard,
+                                  color: primary,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "EUR *2330",
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            )
+                          ],
                         ),
                         Text(
-                          "EUR *2330",
-                          style: TextStyle(
-                              fontSize: 15, ),
-                        )
-                      ],
-                    ),
-                    Text(
                           "8 199.24 EUR",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         )
-                      
-                    
-                    
                       ],
                     )
                   ],

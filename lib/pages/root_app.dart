@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:banking_app/pages/dashboard_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
@@ -40,28 +40,28 @@ class _RootAppState extends State<RootApp> {
       children: [
         DashbaordPage(),
         Center(
-          child: Text("Chat Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Chat Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Notification Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Notification Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Account Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Account Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Card Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Card Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );
